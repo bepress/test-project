@@ -12,3 +12,6 @@ test:
 
 lint:
 	docker-compose run --rm project bin/lint.sh
+
+migrate:
+	docker-compose run --rm project python manage.py migrate
