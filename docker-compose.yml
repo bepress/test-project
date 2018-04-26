@@ -1,0 +1,22 @@
+version: '2'
+services:
+  db:
+    image: postgres:9.6
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+  project:
+    build: .
+    image: project:latests
+    volumes:
+      - .:/usr/src/app
+    working_dir: /usr/src/app
+    command: python manage.py runserver
+    depends_on:
+      - db
+    links:
+      - db
+    environment:
+      - DATABASE_URL=postgres://postgres:postgres@db/postgres
+
+volumes:
+  pgdata:
