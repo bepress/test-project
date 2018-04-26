@@ -13,5 +13,14 @@ test:
 lint:
 	docker-compose run --rm project bin/lint.sh
 
+makemigrations:
+	docker-compose run --rm project python manage.py makemigrations
+
 migrate:
 	docker-compose run --rm project python manage.py migrate
+
+run:
+	docker-compose up -d
+
+logs:
+	docker-compose logs -f
