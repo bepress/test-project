@@ -4,11 +4,12 @@ Simple api project is simple.
 
 ## Requirements
 
-Assume for all operations that we expecting a REST API. Besides the explicit
-capabilities laid out below we should strive for a few things to also be covered.
+Assume for all operations that we expect a REST API. We want to add to add
+some features to our application laid out in the features section. Besides
+those features you should keep in mind a few principals.
 
 1. This project should have tests
-2. This project should follow a style guideline
+2. This project should follow the style guideline
 
 ### Capabilities
 
