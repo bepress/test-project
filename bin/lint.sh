@@ -7,8 +7,8 @@ echo ''
 echo ''
 echo 'Python PyCodeStyle check output:'
 echo ''
-find . -type f -name \*.py \! -iregex '.*/versions.*' \! -iregex '.*/.env.*' \! -iregex '.*/migrations.*' \! -iregex '.*/docs.*' \! -iregex '.*/.docs_env.*' -print0 | xargs -P 4 -n 100 -0 \
-    pycodestyle --max-line-length=132  2>&1 > "$PyCodeStyle_output"
+find . -type f -name \*.py \! -iregex '.*/versions.*' \! -iregex '.*test_settings.py*' \! -iregex '.*/migrations.*' \! -iregex '.*/docs.*' \! -iregex '.*/.docs_env.*' -print0 | xargs -P 4 -n 100 -0 \
+    pipenv run pycodestyle --max-line-length=132  2>&1 > "$PyCodeStyle_output"
 cat "$PyCodeStyle_output"
 if ! [ -s "$PyCodeStyle_output" ]; then
     echo "No PyCodeStyle errors found."
@@ -17,7 +17,7 @@ fi
 echo ''
 echo 'Python pyflakes check output:'
 echo ''
-find . -name \*.py \! -iregex '.*/versions.*' \! -iregex '.*/.env.*' \! -iregex '.*/migrations.*' \! -iregex '.*/docs.*' \! -iregex '.*/.docs_env.*' -print0 | xargs -P 4 -n 100 -0 pyflakes \
+find . -name \*.py \! -iregex '.*/versions.*' \! -iregex '.*/.env.*' \! -iregex '.*/migrations.*' \! -iregex '.*/docs.*' \! -iregex '.*/.docs_env.*' \! -iregex '.*test_settings.py*' -print0 | xargs -P 4 -n 100 -0 pipenv run pyflakes \
     | grep -v "unable to detect undefined names" 2>&1 > "$pyflakes_output"
 cat "$pyflakes_output"
 if ! [ -s "$pyflake_output" ]; then

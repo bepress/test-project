@@ -1,4 +1,4 @@
-from .settings import *
+from .settings import *  # NOQA
 
 MIGRATION_MODULES = {
     'auth': None,

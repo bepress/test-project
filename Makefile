@@ -1,26 +1,24 @@
 PROJECT :=project
 CW :=$(shell pwd)
+DATABASE_URL:=sqlite:///./database.sql
 
-build_container:
-	docker-compose build
+install:
+	pipenv install -d
 
 shell:
-	docker-compose run --rm project /bin/bash
+	pipenv shell
 
 test:
-	docker-compose run --rm project pytest
+	DATABASE_URL=$(DATABASE_URL) pipenv run pytest
 
 lint:
-	docker-compose run --rm project bin/lint.sh
+	bin/lint.sh
 
 makemigrations:
-	docker-compose run --rm project python manage.py makemigrations
+	DATABASE_URL=$(DATABASE_URL) pipenv run python manage.py makemigrations
 
 migrate:
-	docker-compose run --rm project python manage.py migrate
+	DATABASE_URL=$(DATABASE_URL) pipenv run python manage.py migrate
 
 run:
-	docker-compose up -d
-
-logs:
-	docker-compose logs -f
+	DATABASE_URL=$(DATABASE_URL) DEBUG=true pipenv run python manage.py runserver
